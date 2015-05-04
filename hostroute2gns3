@@ -3,9 +3,9 @@
 # routes from host to docker host and to gns3 emulated
 # environment
 #
-export GNS3NETWORK=10.123.0.0
-export GNS3NETMASK=255.255.0.0
-CID=`docker ps | grep gns3-large | awk '{print $1}'`
+export GNS3NETWORK=10.0.0.0
+export GNS3NETMASK=255.0.0.0
+CID=`docker ps | grep gns3-dockered | awk '{print $1}'`
 echo Container ID: $CID
 CIDIP=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CID`
 echo Container IP: $CIDIP
