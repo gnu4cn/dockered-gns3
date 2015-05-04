@@ -1,6 +1,6 @@
 # Version: 0.7.1
 FROM dl.dockerpool.com:5000/ubuntu:14.04
-MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com"
+MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com", Peng Hailin "unisko@gmail.com"
 #
 # increase the version to force recompilation of everything
 #
@@ -16,7 +16,6 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 # ----------------------------------------------------------------- 
 # install needed packages to build and run gns3 and related sw
 #
-RUN cd /etc/apt; sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' sources.list
 RUN apt-get update
 RUN apt-get -y install git wget
 RUN apt-get -y install libpcap-dev uuid-dev libelf-dev cmake
@@ -99,7 +98,6 @@ RUN mkdir /src/misc
 # install gnome connection manager
 #
 RUN cd /src/misc; wget http://kuthulu.com/gcm/gnome-connection-manager_1.1.0_all.deb
-#RUN cd /src/misc; wget http://va.ler.io/myfiles/deb/gnome-connection-manager_1.1.0_all.deb
 RUN apt-get -y install expect python-vte python-glade2
 RUN mkdir -p /usr/share/desktop-directories
 RUN cd /src/misc; dpkg -i gnome-connection-manager_1.1.0_all.deb
