@@ -1,6 +1,8 @@
-# GNS3 1.2.3 docker 镜像 with VPCS, IOU, QEMU and Wireshark
+# GNS3 1.3.2 docker 镜像 with VPCS, IOU, QEMU and Wireshark
 
 ### 新闻
+
+2015-05-04 发现 GNS3 1.3.2 更新，重建镜像，添加 xhost.sh 文件，于允许 myrun.sh 后在另一终端允许此 bash 脚本，即可解决 ubuntu 15.04 上无法连接 x server 的问题。
 
 2015-02-26 Support in China Mainland, modified the /etc/apt/sources.list , and  Change the timezone to  "Asia/Shanghai", add a document which transalted from the original author's English version of installation guide.中国的支持、/etc/apt/sources.list修改，以及时区修正为“Asia/Shanghai”, 添加了一篇安装文档，该文档翻译自本项目的原作者
 
