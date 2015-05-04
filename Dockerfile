@@ -16,6 +16,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 # ----------------------------------------------------------------- 
 # install needed packages to build and run gns3 and related sw
 #
+RUN sed -i "s/archive.ubuntu.com/cn.archive.ubuntu.com/g" /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y install git wget
 RUN apt-get -y install libpcap-dev uuid-dev libelf-dev cmake
@@ -48,7 +49,7 @@ RUN cd /src/gns3-gui ; git checkout v1.3.2 ; python3 setup.py install
 # compile and install vpcs, 64 bit version, vpcs 0.6
 #
 RUN cd /src ; \
-    wget -O - http://sourceforge.net/projects/vpcs/files/latest/download \
+    wget -O - http://sourceforge.net/projects/vpcs/files/0.6/vpcs-0.6-src.tbz/download \
     | bzcat | tar -xvf -
 RUN cd /src/vpcs-*/src ; ./mk.sh 64
 RUN cp /src/vpcs-*/src/vpcs /usr/local/bin/vpcs
