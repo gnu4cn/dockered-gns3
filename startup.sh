@@ -57,6 +57,3 @@ else
     # another root shell
     /bin/bash
 fi
-
-
-
