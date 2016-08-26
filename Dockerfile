@@ -1,5 +1,5 @@
 # Version: 0.7.1
-FROM dl.dockerpool.com:5000/ubuntu:14.04
+FROM ubuntu:14.04
 MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com", Peng Hailin "unisko@gmail.com"
 #
 # increase the version to force recompilation of everything
@@ -30,26 +30,27 @@ RUN apt-get -y install lib32z1 lib32ncurses5 lib32bz2-1.0
 RUN apt-get -y install lxterminal telnet
 RUN apt-get -y install python
 RUN apt-get -y install wireshark cpulimit
+
 #
 # -----------------------------------------------------------------
 # compile and install dynamips, gns3-server, gns3-gui
 #
 RUN mkdir /src
 RUN cd /src; git clone https://github.com/GNS3/dynamips.git
-RUN cd /src/dynamips ; git checkout v0.2.14
+RUN cd /src/dynamips ; git checkout v0.2.16
 RUN mkdir /src/dynamips/build
 RUN cd /src/dynamips/build ;  cmake .. ; make ; make install
 #
 RUN cd /src; git clone https://github.com/GNS3/gns3-gui.git
 RUN cd /src; git clone https://github.com/GNS3/gns3-server.git
-RUN cd /src/gns3-server ; git checkout v1.3.2 ; python3 setup.py install
-RUN cd /src/gns3-gui ; git checkout v1.3.2 ; python3 setup.py install
+RUN cd /src/gns3-server ; git checkout v1.5.2 ; python3 setup.py install
+RUN cd /src/gns3-gui ; git checkout v1.5.2 ; python3 setup.py install
 #
 #-----------------------------------------------------------------------
 # compile and install vpcs, 64 bit version, vpcs 0.6
 #
 RUN cd /src ; \
-    wget -O - http://sourceforge.net/projects/vpcs/files/0.6/vpcs-0.6-src.tbz/download \
+    wget -O - https://sourceforge.net/projects/vpcs/files/0.8/vpcs-0.8-src.tbz/download \
     | bzcat | tar -xvf -
 RUN cd /src/vpcs-*/src ; ./mk.sh 64
 RUN cp /src/vpcs-*/src/vpcs /usr/local/bin/vpcs
@@ -120,4 +121,8 @@ RUN apt-get -y autoremove
 RUN apt-get -y upgrade
 RUN echo "Asia/Shanghai" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
+RUN apt-get -y install python-pip python-dev build-essential
+RUN pip install --upgrade pip
+RUN apt-get -y install python3-pyqt5
+RUN apt-get -y install python3-pyqt5.qtsvg
 ENTRYPOINT cd /src/misc ; ./startup.sh
