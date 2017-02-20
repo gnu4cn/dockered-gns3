@@ -32,57 +32,57 @@ Another important feature of docker containers is that when they stop nothing is
 
 I called the container gns3-large, because it is quite fat, it contains everything needed to build some software included in the image. The Docker file is available on the GitHub repository for the gns3-large project and contains instructions to
 
-从Docker Registry官方的最新版Ubuntu(14.04)基础上建立出该镜像
+- 从Docker Registry官方的最新版Ubuntu(14.04)基础上建立出该镜像
 
-build the image starting from the latest version of Ubuntu (14.04) officially available on the Docker Registry
+- build the image starting from the latest version of Ubuntu (14.04) officially available on the Docker Registry
 
-安装GNS3及有关软件所需的那些软件
+- 安装GNS3及有关软件所需的那些软件
 
-install software required by GNS3 and related software 
+- install software required by GNS3 and related software 
 
-为实现从GNS3内部抓取和分析封包而安装Wireshark
+- 为实现从GNS3内部抓取和分析封包而安装Wireshark
 
-install Wireshark for packet capture and analysis from inside GNS3
+- install Wireshark for packet capture and analysis from inside GNS3
 
-编译并安装Dynamips(GNS3用到的模拟引擎)
+- 编译并安装Dynamips(GNS3用到的模拟引擎)
 
-compile and install Dynamips (the simulation engine used by GNS3)
+- compile and install Dynamips (the simulation engine used by GNS3)
 
-安装gns3-gui以及gns3-server，它们是GNS3的两个部件
+- 安装gns3-gui以及gns3-server，它们是GNS3的两个部件
 
-install gns3-gui and gns3-server, the two components of GNS3
+- install gns3-gui and gns3-server, the two components of GNS3
 
-编译并安装VPCS，它是一类PC模拟器，所模拟出的计算机仅具备基本的网络测试功能，如dhcp客户端、ping等
+- 编译并安装VPCS，它是一类PC模拟器，所模拟出的计算机仅具备基本的网络测试功能，如dhcp客户端、ping等
 
-compile and install VPCS, a sort of pc simulator that implements basic network testing functions like dhcp client, ping etc.
+- compile and install VPCS, a sort of pc simulator that implements basic network testing functions like dhcp client, ping etc.
 
-编译并安装iouyap, 它是在GNS3中得以执行IOU的接口
+- 编译并安装iouyap, 它是在GNS3中得以执行IOU的接口
 
-compile and install iouyap, it is needed to interface the IOU executable with GNS3
+- compile and install iouyap, it is needed to interface the IOU executable with GNS3
 
-安装QEMU，一个类似VirtualBox的仿真软件
+- 安装QEMU，一个类似VirtualBox的仿真软件
 
-install QEMU, an emulator similar to VirtualBox
+- install QEMU, an emulator similar to VirtualBox
 
-安装Gnome连接管理器及gcmconf脚本
+- 安装Gnome连接管理器及gcmconf脚本
 
-install Gnome Connection Manager and the gcmconf script
+- install Gnome Connection Manager and the gcmconf script
 
-将startup.sh设置为在容器启动时可执行
+- 将startup.sh设置为在容器启动时可执行
 
-set startup.sh as the executable that runs when the container starts
+- set startup.sh as the executable that runs when the container starts
 
-该docker容器可通过mybuild脚本来构建，或者：
+- 该docker容器可通过mybuild脚本来构建，或者：
 
-The docker container can be built using the mybuild script or:
+- The docker container can be built using the mybuild script or:
 
-$ sudo docker build -t="digiampietro/gns3-large" .
+`$ sudo docker build -t="digiampietro/gns3-large" .`
 
 你也可以直接从Docker Registry上拉下该镜像：
 
 or the image can be pulled from the Docker Registry with:
 
-$ docker pull digiampietro/gns3-large
+`$ docker pull digiampietro/gns3-large`
 
 这两种方式都需要在你的Linux系统中事先安装Docker。
 
