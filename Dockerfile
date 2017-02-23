@@ -12,6 +12,9 @@ ENV GNS3LARGEVERSION 0.7.5
 #
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
+# 将构建时的pypi服务器，修改为国内服务器
+ENV PIP_INDEX_URL="https://mirrors.aliyun.com/pypi/simple/"
+ENV PIP_TRUSTED_HOST='mirrors.aliyun.com'
 #
 # ----------------------------------------------------------------- 
 # install needed packages to build and run gns3 and related sw
@@ -30,7 +33,8 @@ RUN apt-get -y install lib32z1 lib32ncurses5 lib32bz2-1.0
 RUN apt-get -y install lxterminal telnet
 RUN apt-get -y install python
 RUN apt-get -y install wireshark cpulimit
-
+RUN apt-get -y install python-pip python-dev build-essential python3-pip
+RUN pip3 install --upgrade pip
 #
 # -----------------------------------------------------------------
 # compile and install dynamips, gns3-server, gns3-gui
@@ -43,8 +47,12 @@ RUN cd /src/dynamips/build ;  cmake .. ; make ; make install
 #
 RUN cd /src; git clone https://github.com/GNS3/gns3-gui.git
 RUN cd /src; git clone https://github.com/GNS3/gns3-server.git
-RUN cd /src/gns3-server ; git checkout v1.5.2 ; python3 setup.py install
-RUN cd /src/gns3-gui ; git checkout v1.5.2 ; python3 setup.py install
+RUN cd /src/gns3-server ; git checkout v1.5.2
+RUN pip3 --trusted-host $PIP_INDEX_URL install -r /src/gns3-server/requirements.txt
+RUN python3 setup.py install
+RUN cd /src/gns3-gui ; git checkout v1.5.2
+RUN pip3 --trusted-host $PIP_INDEX_URL install -r /src/gns3-gui/requirements.txt
+RUN python3 setup.py install
 #
 #-----------------------------------------------------------------------
 # compile and install vpcs, 64 bit version, vpcs 0.6
@@ -121,8 +129,6 @@ RUN apt-get -y autoremove
 RUN apt-get -y upgrade
 RUN echo "Asia/Shanghai" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
-RUN apt-get -y install python-pip python-dev build-essential
-RUN pip install --upgrade pip
 RUN apt-get -y install python3-pyqt5
 RUN apt-get -y install python3-pyqt5.qtsvg
 ENTRYPOINT cd /src/misc ; ./startup.sh
