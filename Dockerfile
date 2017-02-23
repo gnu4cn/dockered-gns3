@@ -19,7 +19,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN sed -i "s/archive.ubuntu.com/cn.archive.ubuntu.com/g" /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y install git wget
-RUN apt-get -y install libpcap-dev uuid-dev libelf-dev cmake
+RUN apt-get -y install libpcap-dev uuid-dev libelf-dev cmake libcanberra-gtk-module
 RUN apt-get -y install python3-setuptools python3-pyqt4 python3-ws4py
 RUN apt-get -y install python3-netifaces python3-zmq python3-tornado python3-dev
 RUN apt-get -y install bison flex
