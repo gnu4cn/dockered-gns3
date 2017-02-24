@@ -3,6 +3,7 @@ TRIES=4
 
 push () {
     git add *.*
+    git add Dockerfile
     git add .gitignore
     git add images/*.png
     git add gns3-misc/*.py
